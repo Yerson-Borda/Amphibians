@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -24,6 +23,7 @@ import com.example.amphibians.R
 
 @Composable
 fun HomeScreen(
+    onNextButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -88,7 +88,7 @@ fun HomeScreen(
         }
 
         OutlinedButton(
-            onClick = {},
+            onClick = onNextButtonClicked,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(stringResource(R.string.know_them))
@@ -99,5 +99,5 @@ fun HomeScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen({})
 }

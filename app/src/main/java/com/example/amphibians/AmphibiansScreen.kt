@@ -20,9 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.amphibians.ui.screens.AmphibiansViewModel
+import com.example.amphibians.ui.screens.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -89,7 +91,11 @@ fun AmphibiansScreen(
             startDestination = AmphibiansScreen.Start.name,
             modifier = Modifier.padding(innerPadding)
         ) {
-
+            composable(AmphibiansScreen.Start.name) {
+                HomeScreen(
+                    onNextButtonClicked = { navController.navigate(AmphibiansScreen.List.name) }
+                )
+            }
         }
     }
 }
