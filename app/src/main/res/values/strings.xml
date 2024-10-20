@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Amphibians</string>
+    <string name="know_them">See specimens</string>
+    <string name="back_button">Back</string>
+    <string name="amphibians_description">
+        Amphibians are a diverse class of cold-blooded vertebrates that include frogs, toads, salamanders,
+        newts, and caecilians. They are found in a wide range of habitats, from the tropics to the arctic,
+        even in dry environments.
+    </string>
+    <string name="curiosities">
+        Metamorphosis, Transitioning from aquatic larvae (tadpoles) with gills to terrestrial adults with lungs.
+        This process can involve significant physical changes, such as growing legs and losing their tails.
+    </string>
+    <string name="long_description">
+        Amphibians are found globally but thrive in moist environments, particularly in tropical regions.
+        They possess permeable skin that allows for respiration and water absorption, making their skin
+        essential for survival; if it dries out, they can die quickly. Many species also have skin glands
+        that produce mucus for moisture retention and toxins for defense against predators12. Their diets
+        vary widely; while many eat insects and small invertebrates, some larger species can consume small
+        mammals or birds
+    </string>
+    <string name="subtitle">Curiosities</string>
 </resources>
