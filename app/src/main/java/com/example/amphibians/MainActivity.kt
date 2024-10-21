@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AmphibiansTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AmphibiansScreen(modifier = Modifier.padding(innerPadding)
+                    AmphibiansApp(modifier = Modifier.padding(innerPadding)
                     )
                 }
             }

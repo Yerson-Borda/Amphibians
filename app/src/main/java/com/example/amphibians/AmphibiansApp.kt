@@ -64,7 +64,7 @@ enum class AmphibiansScreen(@StringRes val title: Int) {
 }
 
 @Composable
-fun AmphibiansScreen(
+fun AmphibiansApp(
     viewModel: AmphibiansViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
@@ -84,7 +84,7 @@ fun AmphibiansScreen(
             )
         }
     ) { innerPadding ->
-        val uiState by viewModel.uiState.collectAsState()
+//        val uiState by viewModel.uiState.collectAsState()
 
         NavHost(
             navController = navController,
