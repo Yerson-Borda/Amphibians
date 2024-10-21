@@ -25,6 +25,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.amphibians.ui.screens.AmphibiansViewModel
 import com.example.amphibians.ui.screens.HomeScreen
+import com.example.amphibians.ui.screens.ListOfAmphibiansScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,7 +66,6 @@ enum class AmphibiansScreen(@StringRes val title: Int) {
 
 @Composable
 fun AmphibiansApp(
-    viewModel: AmphibiansViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
 ) {
@@ -84,7 +84,8 @@ fun AmphibiansApp(
             )
         }
     ) { innerPadding ->
-//        val uiState by viewModel.uiState.collectAsState()
+        val amphibiansViewModel: AmphibiansViewModel =
+            viewModel(factory = AmphibiansViewModel.Factory)
 
         NavHost(
             navController = navController,
@@ -94,6 +95,13 @@ fun AmphibiansApp(
             composable(AmphibiansScreen.Start.name) {
                 HomeScreen(
                     onNextButtonClicked = { navController.navigate(AmphibiansScreen.List.name) }
+                )
+            }
+            composable(AmphibiansScreen.List.name) {
+                ListOfAmphibiansScreen(
+                    amphibiansUiState = amphibiansViewModel.amphibiansUiState,
+                    retryAction = amphibiansViewModel::getAmphibiansData,
+                    modifier = Modifier.padding(innerPadding)
                 )
             }
         }

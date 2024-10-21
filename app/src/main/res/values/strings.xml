@@ -20,4 +20,10 @@
         mammals or birds
     </string>
     <string name="subtitle">Curiosities</string>
+
+    <string name="loading_failed">Failed to load</string>
+    <string name="retry">Retry</string>
+    <string name="loading">Loading</string>
+
+    <string name="amphibian_photo">Amphibian photo</string>
 </resources>
