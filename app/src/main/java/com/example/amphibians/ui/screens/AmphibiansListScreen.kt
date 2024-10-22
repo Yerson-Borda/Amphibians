@@ -8,7 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.dimensionResource
-import com.example.amphibians.model.AmphibioData
+import com.example.amphibians.model.Amphibian
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -47,9 +47,9 @@ fun ListOfAmphibiansScreen(
     modifier: Modifier = Modifier,
 ) {
     when (amphibiansUiState) {
-        is AmphibiansUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
-        is AmphibiansUiState.Success -> PhotosGridScreen(amphibiansUiState.photos, modifier)
-        is AmphibiansUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
+        is AmphibiansUiState.Loading -> LoadingScreen(modifier.fillMaxSize())
+        is AmphibiansUiState.Success -> PhotosGridScreen(amphibiansUiState.amphibians, modifier)
+        is AmphibiansUiState.Error -> ErrorScreen(retryAction, modifier.fillMaxSize())
     }
 }
 
@@ -84,7 +84,7 @@ fun ErrorScreen(
 
 @Composable
 fun PhotosGridScreen(
-    amphibians: List<AmphibioData>,
+    amphibians: List<Amphibian>,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
@@ -93,9 +93,6 @@ fun PhotosGridScreen(
             AmphibianItem(
                 amphibian,
                 modifier = modifier
-                    .padding(4.dp)
-                    .fillMaxWidth()
-                    .aspectRatio(1.5f)
             )
         }
     }
@@ -103,7 +100,7 @@ fun PhotosGridScreen(
 
 @Composable
 fun AmphibianItem(
-    amphibian: AmphibioData,
+    amphibian: Amphibian,
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -138,7 +135,7 @@ fun AmphibianItem(
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_extra_small)))
             AsyncImage(
                 model = ImageRequest.Builder(context = LocalContext.current)
-                    .data(amphibian.imageUrl)
+                    .data(amphibian.imgSrc)
                     .crossfade(true)
                     .build(),
                 error = painterResource(R.drawable.ic_broken_image),
@@ -163,7 +160,7 @@ fun AmphibianItem(
 @Composable
 fun ListOfAmphibiansScreenPreview() {
     val mockData = List(10) {
-        AmphibioData(name = "Amphibian $it", type = "Type $it", description = "Description for amphibian $it", imageUrl = "https://example.com/image$it.jpg")
+        Amphibian(name = "Amphibian $it", type = "Type $it", description = "Description for amphibian $it", imgSrc = "https://example.com/image$it.jpg")
     }
     val mockUiState = AmphibiansUiState.Success(mockData)
     ListOfAmphibiansScreen(mockUiState, retryAction = {})

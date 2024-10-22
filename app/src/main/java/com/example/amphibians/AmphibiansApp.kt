@@ -100,8 +100,8 @@ fun AmphibiansApp(
             composable(AmphibiansScreen.List.name) {
                 ListOfAmphibiansScreen(
                     amphibiansUiState = amphibiansViewModel.amphibiansUiState,
-                    retryAction = amphibiansViewModel::getAmphibiansData,
-                    modifier = Modifier.padding(innerPadding)
+                    retryAction = amphibiansViewModel::getAmphibians,
+                    modifier = Modifier
                 )
             }
         }

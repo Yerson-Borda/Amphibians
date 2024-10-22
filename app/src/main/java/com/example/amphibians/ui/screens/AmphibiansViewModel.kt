@@ -10,28 +10,32 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.amphibians.AmphibiansDataApplication
-import com.example.amphibians.data.AmphibiansDataRepository
-import com.example.amphibians.model.AmphibioData
+import com.example.amphibians.data.AmphibiansRepository
+import com.example.amphibians.model.Amphibian
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
 sealed interface AmphibiansUiState {
-    data class Success(val photos: List<AmphibioData>) : AmphibiansUiState
+    data class Success(val amphibians: List<Amphibian>) : AmphibiansUiState
     object Error : AmphibiansUiState
     object Loading : AmphibiansUiState
 }
 
-class AmphibiansViewModel(private val amphibiansDataRepository: AmphibiansDataRepository) : ViewModel() {
+class AmphibiansViewModel(private val amphibiansRepository: AmphibiansRepository) : ViewModel() {
 
     var amphibiansUiState: AmphibiansUiState by mutableStateOf(AmphibiansUiState.Loading)
         private set
 
-    fun getAmphibiansData() {
+    init {
+        getAmphibians()
+    }
+
+    fun getAmphibians() {
         viewModelScope.launch {
             amphibiansUiState = AmphibiansUiState.Loading
             amphibiansUiState = try {
-                AmphibiansUiState.Success(amphibiansDataRepository.getAmphibiansData())
+                AmphibiansUiState.Success(amphibiansRepository.getAmphibians())
             } catch (e: IOException) {
                 AmphibiansUiState.Error
             } catch (e: HttpException) {
@@ -45,8 +49,8 @@ class AmphibiansViewModel(private val amphibiansDataRepository: AmphibiansDataRe
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[APPLICATION_KEY] as AmphibiansDataApplication)
-                val amphibiansDataRepository = application.container.amphibiansDataRepository
-                AmphibiansViewModel(amphibiansDataRepository = amphibiansDataRepository)
+                val amphibiansRepository = application.container.amphibiansRepository
+                AmphibiansViewModel(amphibiansRepository = amphibiansRepository)
             }
         }
     }

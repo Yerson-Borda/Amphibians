@@ -7,7 +7,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 
 interface AppContainer {
-    val amphibiansDataRepository: AmphibiansDataRepository
+    val amphibiansRepository: AmphibiansRepository
 }
 
 class DefaultAppContainer : AppContainer {
@@ -23,7 +23,7 @@ class DefaultAppContainer : AppContainer {
         retrofit.create(AmphibiansApiService::class.java)
     }
 
-    override val amphibiansDataRepository: AmphibiansDataRepository by lazy {
-        NetworkAmphibiansDataRepository(retrofitService)
+    override val amphibiansRepository: AmphibiansRepository by lazy {
+        DefaultAmphibiansRepository(retrofitService)
     }
 }
